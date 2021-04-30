@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.list-group-item {
+  cursor: pointer;
+}
+
 .submit-form {
   max-width: 80%;
   margin: auto;
