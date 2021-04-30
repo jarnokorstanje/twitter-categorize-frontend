@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddCategory from "./components/addCategory";
-import Category from "./components/editCategory";
+import EditCategory from "./components/editCategory";
 import CategoryList from "./components/categoryList";
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
           <Switch>
             <Route exact path={["/", "/categories"]} component={CategoryList} />
             <Route exact path="/add" component={AddCategory} />
-            <Route path="/categories/:id" component={Category} />
+            <Route path="/categories/:id" component={EditCategory} />
           </Switch>
         </div>
       </div>

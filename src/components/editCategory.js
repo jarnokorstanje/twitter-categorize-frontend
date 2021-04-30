@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CategoryService from "../services/category";
 
-export default class Category extends Component {
+export default class EditCategory extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -104,14 +104,17 @@ export default class Category extends Component {
               </div>
               
               <div className="form-group">
-                <label htmlFor="handle">Handle 1:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="handle"
-                  value={currentCategory.Accounts[0].Handle}
-                  onChange={this.onChangeHandle}
-                />
+                <label htmlFor="handle">Handles:</label>
+                {currentCategory.Accounts.map((account, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    className="form-control"
+                    id="handle"
+                    value={account.Handle}
+                    onChange={this.onChangeHandle}
+                  />
+                ))}
               </div>
             </form>
 

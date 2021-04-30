@@ -93,10 +93,10 @@ export default class CategoryList extends Component {
                 </label>{" "}
                 <ul>
                   {currentCategory.Accounts.map((account, index) => (
-                      <li key={index}>
-                        {account.Handle}
-                      </li>
-                    ))}
+                    <li key={index}>
+                      {account.Handle}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
