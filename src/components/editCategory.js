@@ -23,23 +23,29 @@ export default class EditCategory extends Component {
   onChangeTitle(e) {
     const title = e.target.value;
 
-    this.setState(function(prevState) {
+    this.setState(function (prevState) {
       return {
         currentCategory: {
           ...prevState.currentCategory,
-          title: title
+          Title: title
         }
       };
     });
   }
 
   onChangeHandle(e) {
-    const handle = e.target.value;
-    
+    const input = e.target.value;
+    const index = e.target.id;
+
+    let accounts = [...this.state.currentCategory.Accounts];
+    let account = {...accounts[index]};
+    account.Handle = input;
+    accounts[index] = account;
+
     this.setState(prevState => ({
       currentCategory: {
         ...prevState.currentCategory,
-        handle: handle
+        Accounts: accounts
       }
     }));
   }
@@ -72,7 +78,7 @@ export default class EditCategory extends Component {
       });
   }
 
-  deleteCategory() {    
+  deleteCategory() {
     CategoryService.delete(this.state.currentCategory.id)
       .then(response => {
         console.log(response.data.data);
@@ -102,7 +108,7 @@ export default class EditCategory extends Component {
                   onChange={this.onChangeTitle}
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="handle">Handles:</label>
                 {currentCategory.Accounts.map((account, index) => (
@@ -110,7 +116,7 @@ export default class EditCategory extends Component {
                     key={index}
                     type="text"
                     className="form-control"
-                    id="handle"
+                    id={index}
                     value={account.Handle}
                     onChange={this.onChangeHandle}
                   />
