@@ -5,40 +5,57 @@ export default class AddCategory extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeHandle = this.onChangeHandle.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
     this.newCategory = this.newCategory.bind(this);
 
     this.state = {
-      id: null,
-      title: "",
-      description: "",
-
+      newCategory: {
+        Title: "",
+        Accounts: []
+      },
       submitted: false
     };
   }
 
   onChangeTitle(e) {
-    this.setState({
-      title: e.target.value
-    });
+    const title = e.target.value;
+    this.setState(prevState => ({
+      newCategory: {
+        ...prevState.newCategory,
+        Title: title
+      }
+    }));
+  }
+
+  onChangeHandle(e) {
+    const input = e.target.value;
+    const index = e.target.id;
+
+    let accounts = [...this.state.newCategory.Accounts];
+    let account = {...accounts[index]};
+    account.Handle = input;
+    accounts[index] = account;
+
+    this.setState(prevState => ({
+      newCategory: {
+        ...prevState.newCategory,
+        Accounts: accounts
+      }
+    }));
   }
 
   saveCategory() {
     var data = {
-      title: this.state.title,
-      description: this.state.description
+      newCategory: this.state.newCategory
     };
 
     CategoryService.create(data)
       .then(response => {
+        console.log(response.data);
         this.setState({
-          id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-
           submitted: true
         });
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -47,15 +64,31 @@ export default class AddCategory extends Component {
 
   newCategory() {
     this.setState({
-      id: null,
-      title: "",
-      description: "",
-
+      newCategory: null,
       submitted: false
     });
   }
 
   render() {
+    const { newCategory } = this.state;
+    console.log(newCategory);
+
+    let handle0 = "";
+    let handle1 = "";
+    let handle2 = "";
+
+    if (typeof newCategory.Accounts[0] !== 'undefined') {
+      handle0 = newCategory.Accounts[0].Handle;
+    }
+
+    if (typeof newCategory.Accounts[1] !== 'undefined') {
+      handle1 = newCategory.Accounts[1].Handle;
+    }
+
+    if (typeof newCategory.Accounts[2] !== 'undefined') {
+      handle2 = newCategory.Accounts[2].Handle;
+    }
+
     return (
       <div className="submit-form">
         {this.state.submitted ? (
@@ -79,6 +112,34 @@ export default class AddCategory extends Component {
                 name="title"
               />
             </div>
+
+            <div className="form-group">
+                <label htmlFor="handle">Handles:</label>
+                  <input
+                    key={0}
+                    type="text"
+                    className="form-control"
+                    id={0}
+                    value={handle0}
+                    onChange={this.onChangeHandle}
+                  />
+                  <input
+                    key={1}
+                    type="text"
+                    className="form-control"
+                    id={1}
+                    value={handle1}
+                    onChange={this.onChangeHandle}
+                  />
+                  <input
+                    key={2}
+                    type="text"
+                    className="form-control"
+                    id={2}
+                    value={handle2}
+                    onChange={this.onChangeHandle}
+                  />
+              </div>
 
             <button onClick={this.saveCategory} className="btn btn-success">
               Submit
