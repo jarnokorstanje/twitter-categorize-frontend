@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddCategory from "./components/addCategory";
-import Category from "./components/category";
+import Category from "./components/editCategory";
 import CategoryList from "./components/categoryList";
 
 class App extends Component {

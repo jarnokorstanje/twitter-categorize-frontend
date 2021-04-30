@@ -20,16 +20,24 @@ class CategoryService {
     );
   }
 
-  // get(id) {
-  //   return api.post(
-  //     "/", 
-  //     { query: `
-  //       {
-          
-  //       }`
-  //     }
-  //   );
-  // }
+  get(id) {
+    return api.post(
+      "/", 
+      { query: `
+        {
+          category(id: "${id}") {
+            id
+            UserId
+            Title
+            Accounts {
+              id
+              Handle
+            }
+          }
+        }`
+      }
+    );
+  }
 
   // create(data) {
   //   return api.post(

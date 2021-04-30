@@ -5,26 +5,26 @@ import { Link } from "react-router-dom";
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    this.retrieveTutorials = this.retrieveCategories.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
+    this.setActiveTutorial = this.setActiveCategory.bind(this);
 
     this.state = {
-      tutorials: [],
-      currentTutorial: null,
+      categories: [],
+      currentCategory: null,
       currentIndex: -1
     };
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    this.retrieveCategories();
   }
 
-  retrieveTutorials() {
+  retrieveCategories() {
     CategoryService.getAll()
       .then(response => {
         this.setState({
-          tutorials: response.data.data.categories
+          categories: response.data.data.categories
         });
       })
       .catch(e => {
@@ -33,22 +33,22 @@ export default class CategoryList extends Component {
   }
 
   refreshList() {
-    this.retrieveTutorials();
+    this.retrieveCategories();
     this.setState({
-      currentTutorial: null,
+      currentCategory: null,
       currentIndex: -1
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  setActiveCategory(category, index) {
     this.setState({
-      currentTutorial: tutorial,
+      currentCategory: category,
       currentIndex: index
     });
   }
 
   render() {
-    const { tutorials, currentTutorial, currentIndex } = this.state;
+    const { categories, currentCategory, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -56,46 +56,46 @@ export default class CategoryList extends Component {
           <h4>All categories</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {categories &&
+              categories.map((category, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActiveCategory(category, index)}
                   key={index}
                 >
-                  {tutorial.Title}
+                  {category.Title}
                 </li>
               ))}
           </ul>
         </div>
         <div className="col-md-6">
-          {currentTutorial ? (
+          {currentCategory ? (
             <div>
               <h4>Category</h4>
               <div>
                 <label>
                   <strong>Title:</strong>
                 </label>{" "}
-                {currentTutorial.Title}
+                {currentCategory.Title}
               </div>
               <div>
                 <label>
                   <strong>User:</strong>
                 </label>{" "}
-                {currentTutorial.UserId}
+                {currentCategory.UserId}
               </div>
               <div>
                 <label>
                   <strong>Handle 1:</strong>
                 </label>{" "}
-                {currentTutorial.Accounts[0].Handle}
+                {currentCategory.Accounts[0].Handle}
               </div>
 
               <Link
-                to={"/tutorials/" + currentTutorial.id}
+                to={"/categories/" + currentCategory.id}
                 className="badge badge-warning"
               >
                 Edit
