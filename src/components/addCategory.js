@@ -46,13 +46,11 @@ export default class AddCategory extends Component {
   }
 
   saveCategory() {
-    var data = {
-      newCategory: this.state.newCategory
-    };
+    let newCategory = this.state.newCategory;
 
-    CategoryService.create(data)
+    CategoryService.create(newCategory)
       .then(response => {
-        console.log(response.data);
+        console.log(response);
         this.setState({
           submitted: true
         });
@@ -71,7 +69,6 @@ export default class AddCategory extends Component {
 
   render() {
     const { newCategory } = this.state;
-    console.log(newCategory);
 
     let handle0 = "";
     let handle1 = "";
