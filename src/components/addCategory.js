@@ -100,6 +100,11 @@ export default class AddCategory extends Component {
 
     return (
       <div className="submit-form">
+        <header>
+          <h3>
+            Add category
+          </h3>
+        </header>
         {this.state.submitted ? (
           <div>
             <h4>Submitted successfully!</h4>

@@ -28,20 +28,20 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div className="container">
+      <div className="col-md-6">
         {(this.state.userReady) ?
         <div>
-        <header>
-          <h3>
-            Profile
-          </h3>
-        </header>
-        <p>
-          <strong>Token:</strong>{" "}
-          {currentUser.token.substring(0, 20)} ...{" "}
-          {currentUser.token.substr(currentUser.token.length - 20)}
-        </p>
-      </div>: null}
+          <header>
+            <h3>
+              Profile
+            </h3>
+          </header>
+          <p>
+            <strong>Token:</strong>{" "}
+            {currentUser.token.substring(0, 20)} ...{" "}
+            {currentUser.token.substr(currentUser.token.length - 20)}
+          </p>
+        </div>: null}
       </div>
     );
   }
