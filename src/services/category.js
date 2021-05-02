@@ -34,7 +34,7 @@ mutation modifyCategory($id: ID!, $userId: String!, $title: String!, $accounts: 
 `
 
 const DELETE_CATEGORY = gql`
-mutation deleteCategory($id: String!) {
+mutation deleteCategory($id: ID!) {
   deleteCategory(id: $id) {
     id
   }
