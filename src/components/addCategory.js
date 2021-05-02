@@ -17,6 +17,8 @@ export default class AddCategory extends Component {
         title: "",
         accounts: []
       },
+      handleAmount: 3,
+      handles: [],
       submitted: false
     };
   }
@@ -41,7 +43,7 @@ export default class AddCategory extends Component {
     const index = e.target.id;
 
     let accounts = [...this.state.newCategory.accounts];
-    let account = {...accounts[index]};
+    let account = { ...accounts[index] };
     account.handle = input;
     accounts[index] = account;
 
@@ -58,7 +60,6 @@ export default class AddCategory extends Component {
 
     CategoryService.create(newCategory)
       .then(response => {
-        console.log(response);
         this.setState({
           submitted: true
         });
@@ -78,28 +79,34 @@ export default class AddCategory extends Component {
     });
   }
 
+  createHandleInputs = () => {
+    let inputs = []
+
+    for (let i = 0; i < this.state.handleAmount; i++) {
+      inputs.push(
+        <input
+          key={i}
+          type="text"
+          className="form-control"
+          id={i}
+          value={this.state.handles[i]}
+          onChange={this.onChangeHandle}
+        />
+      )
+    }
+    return inputs
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
     }
 
-    const { newCategory } = this.state;
+    const { newCategory, handleAmount, handles } = this.state;
 
-    let handle0 = "";
-    let handle1 = "";
-    let handle2 = "";
-
-    if (typeof newCategory.accounts[0] !== 'undefined') {
-      handle0 = newCategory.accounts[0].handle;
-    }
-
-    if (typeof newCategory.accounts[1] !== 'undefined') {
-      handle1 = newCategory.accounts[1].handle;
-    }
-
-    if (typeof newCategory.accounts[2] !== 'undefined') {
-      handle2 = newCategory.accounts[2].handle;
-    }
+    handles.forEach(function (handle, index) {
+      newCategory.accounts[index].handle = handle;
+    });
 
     return (
       <div className="submit-form">
@@ -131,32 +138,9 @@ export default class AddCategory extends Component {
             </div>
 
             <div className="form-group">
-                <label htmlFor="handle">Handles:</label>
-                  <input
-                    key={0}
-                    type="text"
-                    className="form-control"
-                    id={0}
-                    value={handle0}
-                    onChange={this.onChangeHandle}
-                  />
-                  <input
-                    key={1}
-                    type="text"
-                    className="form-control"
-                    id={1}
-                    value={handle1}
-                    onChange={this.onChangeHandle}
-                  />
-                  <input
-                    key={2}
-                    type="text"
-                    className="form-control"
-                    id={2}
-                    value={handle2}
-                    onChange={this.onChangeHandle}
-                  />
-              </div>
+              <label htmlFor="handle">Handles:</label>
+              {this.createHandleInputs()}
+            </div>
 
             <button onClick={this.saveCategory} className="btn btn-success">
               Submit
