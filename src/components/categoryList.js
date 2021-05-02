@@ -54,6 +54,10 @@ export default class CategoryList extends Component {
     });
   }
 
+  toEdit(id) {
+    this.props.history.push('/categories/' + this.state.currentCategory.id);
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
@@ -90,6 +94,12 @@ export default class CategoryList extends Component {
           {currentCategory ? (
             <div>
               <h4>Category</h4>
+              <Link
+                to={"/categories/" + currentCategory.id}
+                className="btn btn-warning"
+              >
+                Edit
+              </Link>
               <div>
                 <label>
                   <strong>Title:</strong>
@@ -114,13 +124,6 @@ export default class CategoryList extends Component {
                   ))}
                 </ul>
               </div>
-
-              <Link
-                to={"/categories/" + currentCategory.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
             </div>
           ) : (
             <div>

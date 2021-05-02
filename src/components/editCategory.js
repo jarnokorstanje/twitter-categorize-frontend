@@ -134,15 +134,15 @@ export default class EditCategory extends Component {
             </form>
 
             <button
-              className="badge badge-danger mr-2"
+              className="btn btn-danger"
               onClick={this.deleteCategory}
             >
               Delete
-            </button>
+            </button>{" "}
 
             <button
               type="submit"
-              className="badge badge-success"
+              className="btn btn-success"
               onClick={this.updateCategory}
             >
               Update
