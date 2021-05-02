@@ -11,8 +11,8 @@ export default class AddCategory extends Component {
 
     this.state = {
       newCategory: {
-        Title: "",
-        Accounts: []
+        title: "",
+        accounts: []
       },
       submitted: false
     };
@@ -23,7 +23,7 @@ export default class AddCategory extends Component {
     this.setState(prevState => ({
       newCategory: {
         ...prevState.newCategory,
-        Title: title
+        title: title
       }
     }));
   }
@@ -32,15 +32,15 @@ export default class AddCategory extends Component {
     const input = e.target.value;
     const index = e.target.id;
 
-    let accounts = [...this.state.newCategory.Accounts];
+    let accounts = [...this.state.newCategory.accounts];
     let account = {...accounts[index]};
-    account.Handle = input;
+    account.handle = input;
     accounts[index] = account;
 
     this.setState(prevState => ({
       newCategory: {
         ...prevState.newCategory,
-        Accounts: accounts
+        accounts: accounts
       }
     }));
   }
@@ -70,20 +70,22 @@ export default class AddCategory extends Component {
   render() {
     const { newCategory } = this.state;
 
+    console.log(this.state);
+
     let handle0 = "";
     let handle1 = "";
     let handle2 = "";
 
-    if (typeof newCategory.Accounts[0] !== 'undefined') {
-      handle0 = newCategory.Accounts[0].Handle;
+    if (typeof newCategory.accounts[0] !== 'undefined') {
+      handle0 = newCategory.accounts[0].handle;
     }
 
-    if (typeof newCategory.Accounts[1] !== 'undefined') {
-      handle1 = newCategory.Accounts[1].Handle;
+    if (typeof newCategory.accounts[1] !== 'undefined') {
+      handle1 = newCategory.accounts[1].handle;
     }
 
-    if (typeof newCategory.Accounts[2] !== 'undefined') {
-      handle2 = newCategory.Accounts[2].Handle;
+    if (typeof newCategory.accounts[2] !== 'undefined') {
+      handle2 = newCategory.accounts[2].handle;
     }
 
     return (
@@ -104,7 +106,7 @@ export default class AddCategory extends Component {
                 className="form-control"
                 id="title"
                 required
-                value={this.state.title}
+                value={this.state.newCategory.title}
                 onChange={this.onChangeTitle}
                 name="title"
               />
