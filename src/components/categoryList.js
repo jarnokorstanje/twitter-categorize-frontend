@@ -53,7 +53,11 @@ export default class CategoryList extends Component {
     return (
       <div className="list row">
         <div className="col-md-6">
-          <h4>All categories</h4>
+          <header>
+            <h3>
+              All categories
+            </h3>
+          </header>
 
           <ul className="list-group">
             {categories &&

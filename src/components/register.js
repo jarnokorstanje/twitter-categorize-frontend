@@ -79,7 +79,7 @@ export default class Register extends Component {
       ).then(
         response => {
           this.setState({
-            message: response.data.message,
+            message: "Registered succesfully!",
             successful: true
           });
         },

@@ -6,11 +6,13 @@ class AuthService {
   login(username, password) {
     return axios
       .post(API_URL + "login", {
-        username,
-        password
+        "username": username,
+        "password": password
       })
       .then(response => {
-        if (response.data.accessToken) {
+        console.log(response.data);
+
+        if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
 
@@ -24,13 +26,13 @@ class AuthService {
 
   register(username, password) {
     return axios.post(API_URL + "register", {
-      username,
-      password
+      "username": username,
+      "password": password
     });
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem("user"));
   }
 }
 
