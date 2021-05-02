@@ -33,6 +33,14 @@ mutation modifyCategory($id: ID!, $userId: String!, $title: String!, $accounts: 
 }
 `
 
+const DELETE_CATEGORY = gql`
+mutation deleteCategory($id: String!) {
+  deleteCategory(id: $id) {
+    id
+  }
+}
+`
+
 class CategoryService {
   getAll() {
     return axios.post(
@@ -45,7 +53,6 @@ class CategoryService {
             userId
             title
             accounts {
-              id
               handle
             }
           }
@@ -65,7 +72,6 @@ class CategoryService {
             userId
             title
             accounts {
-              id
               handle
             }
           }
@@ -107,16 +113,18 @@ class CategoryService {
     );
   }
 
-  // delete(id) {
-  //   return axios.post(
-  //     API_URL, 
-  //     { query: `
-  //       {
-
-  //       }`
-  //     }
-  //   );
-  // }
+  delete(id) {
+    return axios.post(
+      API_URL,
+      {
+        query: print(DELETE_CATEGORY),
+        variables: {
+          "id": id
+        }
+      },
+      { headers: authHeader() }
+    );
+  }
 }
 
 export default new CategoryService();
