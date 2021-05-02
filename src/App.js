@@ -44,6 +44,8 @@ class App extends Component {
           <Link to={"/categories"} className="navbar-brand">
             Twitter Categorize
           </Link>
+
+          {currentUser ? (
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/categories"} className="nav-link">
@@ -56,6 +58,7 @@ class App extends Component {
               </Link>
             </li>
           </div>
+          ) : null }
 
           {currentUser ? (
             <div className="navbar-nav ml-auto">
