@@ -86,7 +86,6 @@ export default class EditCategory extends Component {
   deleteCategory() {
     CategoryService.delete(this.state.currentCategory.id)
       .then(response => {
-        console.log(response.data.data);
         this.props.history.push('/categories')
       })
       .catch(e => {

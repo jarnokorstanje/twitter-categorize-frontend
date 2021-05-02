@@ -70,7 +70,10 @@ export default class AddCategory extends Component {
 
   newCategory() {
     this.setState({
-      newCategory: null,
+      newCategory: {
+        title: "",
+        accounts: []
+      },
       submitted: false
     });
   }
