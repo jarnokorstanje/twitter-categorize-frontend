@@ -63,10 +63,7 @@ export default class EditCategory extends Component {
   }
 
   updateCategory() {
-    CategoryService.update(
-      this.state.currentCategory.id,
-      this.state.currentCategory
-    )
+    CategoryService.update(this.state.currentCategory)
       .then(response => {
         console.log(response.data.data);
         this.setState({

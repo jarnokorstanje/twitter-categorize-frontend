@@ -19,6 +19,20 @@ mutation addCategory($userId: String!, $title: String!, $accounts: [NewAccounts]
 }
 `
 
+const MODIFY_CATEGORY = gql`
+mutation modifyCategory($id: ID!, $userId: String!, $title: String!, $accounts: [NewAccounts]) {
+  modifyCategory(id: $id, userId: $userId, title: $title, accounts: $accounts) {
+    id
+    userId
+    title
+    accounts {
+      id
+      handle
+    }
+  }
+}
+`
+
 class CategoryService {
   getAll() {
     return axios.post(
@@ -75,16 +89,23 @@ class CategoryService {
     );
   }
 
-  // update(id, data) {
-  //   return axios.post(
-  //     API_URL, 
-  //     { query: `
-  //       {
+  update(currentCategory) {
+    console.log(currentCategory);
 
-  //       }`
-  //     }
-  //   );
-  // }
+    return axios.post(
+      API_URL,
+      {
+        query: print(MODIFY_CATEGORY),
+        variables: {
+          "id": currentCategory.id,
+          "userId": "Jarno",
+          "title": currentCategory.title,
+          "accounts": currentCategory.accounts
+        }
+      },
+      { headers: authHeader() }
+    );
+  }
 
   // delete(id) {
   //   return axios.post(
