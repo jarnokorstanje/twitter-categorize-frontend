@@ -93,19 +93,13 @@ export default class CategoryList extends Component {
         <div className="col-md-6">
           {currentCategory ? (
             <div>
-              <h4>Category</h4>
+              <h4>Category: {currentCategory.title}</h4>
               <Link
                 to={"/categories/" + currentCategory.id}
                 className="btn btn-warning"
               >
                 Edit
               </Link>
-              <div>
-                <label>
-                  <strong>Title:</strong>
-                </label>{" "}
-                {currentCategory.title}
-              </div>
               <div>
                 <label>
                   <strong>User:</strong>
