@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import AuthService from "../services/auth";
 import CategoryService from "../services/category";
 
 export default class AddCategory extends Component {
@@ -10,12 +12,18 @@ export default class AddCategory extends Component {
     this.newCategory = this.newCategory.bind(this);
 
     this.state = {
+      redirect: null,
       newCategory: {
         title: "",
         accounts: []
       },
       submitted: false
     };
+  }
+
+  componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+    if (!currentUser) this.setState({ redirect: "/login" });
   }
 
   onChangeTitle(e) {
@@ -68,6 +76,10 @@ export default class AddCategory extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     const { newCategory } = this.state;
 
     let handle0 = "";

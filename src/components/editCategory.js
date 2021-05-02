@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import AuthService from "../services/auth";
 import CategoryService from "../services/category";
 
 export default class EditCategory extends Component {
@@ -11,13 +13,19 @@ export default class EditCategory extends Component {
     this.deleteCategory = this.deleteCategory.bind(this);
 
     this.state = {
+      redirect: null,
       currentCategory: null,
       message: ""
     };
   }
 
   componentDidMount() {
-    this.getCategory(this.props.match.params.id);
+    const currentUser = AuthService.getCurrentUser();
+    if (!currentUser) {
+      this.setState({ redirect: "/login" })
+    } else {
+      this.getCategory(this.props.match.params.id);
+    }
   }
 
   onChangeTitle(e) {
@@ -87,6 +95,10 @@ export default class EditCategory extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     const { currentCategory } = this.state;
 
     return (

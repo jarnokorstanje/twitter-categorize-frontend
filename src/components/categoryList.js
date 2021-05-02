@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import AuthService from "../services/auth";
 import CategoryService from "../services/category";
 import { Link } from "react-router-dom";
 
@@ -17,7 +19,12 @@ export default class CategoryList extends Component {
   }
 
   componentDidMount() {
-    this.retrieveCategories();
+    const currentUser = AuthService.getCurrentUser();
+    if (!currentUser) {
+      this.setState({ redirect: "/login" })
+    } else {
+      this.retrieveCategories();
+    }
   }
 
   retrieveCategories() {
@@ -48,6 +55,10 @@ export default class CategoryList extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     const { categories, currentCategory, currentIndex } = this.state;
 
     return (
