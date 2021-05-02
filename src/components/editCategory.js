@@ -27,7 +27,7 @@ export default class EditCategory extends Component {
       return {
         currentCategory: {
           ...prevState.currentCategory,
-          Title: title
+          title: title
         }
       };
     });
@@ -37,15 +37,15 @@ export default class EditCategory extends Component {
     const input = e.target.value;
     const index = e.target.id;
 
-    let accounts = [...this.state.currentCategory.Accounts];
+    let accounts = [...this.state.currentCategory.accounts];
     let account = {...accounts[index]};
-    account.Handle = input;
+    account.handle = input;
     accounts[index] = account;
 
     this.setState(prevState => ({
       currentCategory: {
         ...prevState.currentCategory,
-        Accounts: accounts
+        accounts: accounts
       }
     }));
   }
@@ -104,20 +104,20 @@ export default class EditCategory extends Component {
                   type="text"
                   className="form-control"
                   id="title"
-                  value={currentCategory.Title}
+                  value={currentCategory.title}
                   onChange={this.onChangeTitle}
                 />
               </div>
 
               <div className="form-group">
                 <label htmlFor="handle">Handles:</label>
-                {currentCategory.Accounts.map((account, index) => (
+                {currentCategory.accounts.map((account, index) => (
                   <input
                     key={index}
                     type="text"
                     className="form-control"
                     id={index}
-                    value={account.Handle}
+                    value={account.handle}
                     onChange={this.onChangeHandle}
                   />
                 ))}

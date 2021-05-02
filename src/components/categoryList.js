@@ -49,6 +49,7 @@ export default class CategoryList extends Component {
 
   render() {
     const { categories, currentCategory, currentIndex } = this.state;
+    console.log(categories);
 
     return (
       <div className="list row">
@@ -66,7 +67,7 @@ export default class CategoryList extends Component {
                   onClick={() => this.setActiveCategory(category, index)}
                   key={index}
                 >
-                  {category.Title}
+                  {category.title}
                 </li>
               ))}
           </ul>
@@ -79,22 +80,22 @@ export default class CategoryList extends Component {
                 <label>
                   <strong>Title:</strong>
                 </label>{" "}
-                {currentCategory.Title}
+                {currentCategory.title}
               </div>
               <div>
                 <label>
                   <strong>User:</strong>
                 </label>{" "}
-                {currentCategory.UserId}
+                {currentCategory.userId}
               </div>
               <div>
                 <label>
                   <strong>Handles:</strong>
                 </label>{" "}
                 <ul>
-                  {currentCategory.Accounts.map((account, index) => (
+                  {currentCategory.accounts.map((account, index) => (
                     <li key={index}>
-                      {account.Handle}
+                      {account.handle}
                     </li>
                   ))}
                 </ul>

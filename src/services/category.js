@@ -14,11 +14,11 @@ class CategoryService {
         {
           categories {
             id
-            UserId
-            Title
-            Accounts {
+            userId
+            title
+            accounts {
               id
-              Handle
+              handle
             }
           }
         }`
@@ -34,11 +34,11 @@ class CategoryService {
         {
           category(id: "${id}") {
             id
-            UserId
-            Title
-            Accounts {
+            userId
+            title
+            accounts {
               id
-              Handle
+              handle
             }
           }
         }`
