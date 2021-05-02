@@ -10,6 +10,8 @@ export default class AddCategory extends Component {
     this.onChangeHandle = this.onChangeHandle.bind(this);
     this.saveCategory = this.saveCategory.bind(this);
     this.newCategory = this.newCategory.bind(this);
+    this.removeInput = this.removeInput.bind(this);
+    this.addInput = this.addInput.bind(this);
 
     this.state = {
       redirect: null,
@@ -17,7 +19,7 @@ export default class AddCategory extends Component {
         title: "",
         accounts: []
       },
-      handleAmount: 3,
+      handleAmount: 1,
       handles: [],
       submitted: false
     };
@@ -97,12 +99,26 @@ export default class AddCategory extends Component {
     return inputs
   }
 
+  removeInput() {
+    if (this.state.handleAmount >= 1) {
+      this.setState({
+        handleAmount: this.state.handleAmount - 1
+      });
+    }
+  }
+
+  addInput() {
+    this.setState({
+      handleAmount: this.state.handleAmount + 1
+    });
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
     }
 
-    const { newCategory, handleAmount, handles } = this.state;
+    const { newCategory, handles } = this.state;
 
     handles.forEach(function (handle, index) {
       newCategory.accounts[index].handle = handle;
@@ -140,6 +156,21 @@ export default class AddCategory extends Component {
             <div className="form-group">
               <label htmlFor="handle">Handles:</label>
               {this.createHandleInputs()}
+            </div>
+
+            <div className="form-group"> 
+              <button
+                className="btn btn-danger"
+                onClick={this.removeInput}
+              >
+                -
+              </button>{" "}
+              <button
+                className="btn btn-success"
+                onClick={this.addInput}
+              >
+                +
+              </button>
             </div>
 
             <button onClick={this.saveCategory} className="btn btn-success">
