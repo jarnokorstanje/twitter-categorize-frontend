@@ -5,6 +5,20 @@ import authHeader from './authHeader.js';
 
 const API_URL = 'https://node152605-jakor-mongo-node.jelastic.metropolia.fi/graphql';
 
+const ADD_CATEGORY = gql`
+mutation addCategory($userId: String!, $title: String!, $accounts: [NewAccounts]) {
+  addCategory(userId: $userId, title: $title, accounts: $accounts) {
+    id
+    userId
+    title
+    accounts {
+      id
+      handle
+    }
+  }
+}
+`
+
 class CategoryService {
   getAll() {
     return axios.post(
@@ -47,63 +61,18 @@ class CategoryService {
   }
 
   create(newCategory) {
-    let accountsQuery = "";
-
-    newCategory.Accounts.forEach(function (account) {
-      accountsQuery = accountsQuery.concat(`{Handle: "${account.Handle}"},`);
-    });
-
     return axios.post(
       API_URL,
       {
-        query: `
-        {
-          mutation addCategory(
-              UserId: "Jarno"
-              Title: "${newCategory.Title}",
-              Accounts: [
-                ${accountsQuery}
-              ]
-            )
-            {
-              id
-              UserId
-              Title
-              Accounts {
-                id
-                Handle
-              }
-            }
-          }
-        }`
+        query: print(ADD_CATEGORY),
+        variables: {
+          "userId": "Jarno",
+          "title": newCategory.title,
+          "accounts": newCategory.accounts
+        }
       },
       { headers: authHeader() }
     );
-
-    // console.log(
-    //   {
-    //     query: `
-    //     {
-    //       mutation addCategory(
-    //           UserId: "Jarno"
-    //           Title: "${newCategory.Title}",
-    //           Accounts: [
-    //             ${accountsQuery}
-    //           ]
-    //         )
-    //         {
-    //           id
-    //           UserId
-    //           Title
-    //           Accounts {
-    //             id
-    //             Handle
-    //           }
-    //         }
-    //       }
-    //     }`
-    //   }
-    // );
   }
 
   // update(id, data) {

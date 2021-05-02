@@ -70,8 +70,6 @@ export default class AddCategory extends Component {
   render() {
     const { newCategory } = this.state;
 
-    console.log(this.state);
-
     let handle0 = "";
     let handle1 = "";
     let handle2 = "";
@@ -94,7 +92,7 @@ export default class AddCategory extends Component {
           <div>
             <h4>Submitted successfully!</h4>
             <button className="btn btn-success" onClick={this.newCategory}>
-              Add
+              Add another
             </button>
           </div>
         ) : (

@@ -49,7 +49,6 @@ export default class CategoryList extends Component {
 
   render() {
     const { categories, currentCategory, currentIndex } = this.state;
-    console.log(categories);
 
     return (
       <div className="list row">
