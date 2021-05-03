@@ -120,7 +120,7 @@ export default class EditCategory extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="handle">Handles:</label>
+                <label htmlFor="handle">Twitter profiles:</label>
                 {currentCategory.accounts.map((account, index) => (
                   <input
                     key={index}

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import AuthService from "../services/auth";
 import CategoryService from "../services/category";
 import { Link } from "react-router-dom";
+import { Timeline } from 'react-twitter-widgets'
 
 export default class CategoryList extends Component {
   constructor(props) {
@@ -102,13 +103,7 @@ export default class CategoryList extends Component {
               </Link>
               <div>
                 <label>
-                  <strong>User:</strong>
-                </label>{" "}
-                {currentCategory.userId}
-              </div>
-              <div>
-                <label>
-                  <strong>Handles:</strong>
+                  <strong>Twitter profiles:</strong>
                 </label>{" "}
                 <ul>
                   {currentCategory.accounts.map((account, index) => (
@@ -118,11 +113,22 @@ export default class CategoryList extends Component {
                   ))}
                 </ul>
               </div>
+              <div>
+                <Timeline
+                  dataSource={{
+                    sourceType: 'profile',
+                    screenName: 'TwitterDev'
+                  }}
+                  options={{
+                    height: '600'
+                  }}
+                />
+              </div>
             </div>
           ) : (
             <div>
               <br />
-              <p>Please click on a category...</p>
+              <p>Click on a category to see details...</p>
             </div>
           )}
         </div>

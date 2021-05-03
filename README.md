@@ -17,6 +17,7 @@ Node.js backend here: https://github.com/jarnokorstanje/twitter-categorize
 - Login page to get Bearer Token and store in localstorage
 - Logout button to delete Bearer Token from localstorage
 - Profile page to see user details
+- If not logged in, every page except register will redirect to login page
 
 
 ## CRUD functionality (categories):

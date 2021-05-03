@@ -156,7 +156,7 @@ export default class AddCategory extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="handle">Handles:</label>
+              <label htmlFor="handle">Twitter profiles:</label>
               {this.createHandleInputs()}
             </div>
 
