@@ -9,6 +9,7 @@ Node.js backend here: https://github.com/jarnokorstanje/twitter-categorize
 
 - React app with Bootstrap components
 - Authenticated mutations
+- SSL (HTTPS)
 - Displays tweets with react-twitter-widgets: https://www.npmjs.com/package/react-twitter-widgets
 
 
