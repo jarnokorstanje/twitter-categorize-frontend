@@ -93,16 +93,14 @@ class CategoryService {
     );
   }
 
-  update(currentCategory) {
-    console.log(currentCategory);
-
+  update(currentCategory, currentUser) {
     return axios.post(
       API_URL,
       {
         query: print(MODIFY_CATEGORY),
         variables: {
           "id": currentCategory.id,
-          "userId": "Jarno",
+          "userId": currentUser.user._id,
           "title": currentCategory.title,
           "accounts": currentCategory.accounts
         }

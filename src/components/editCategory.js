@@ -15,12 +15,14 @@ export default class EditCategory extends Component {
     this.state = {
       redirect: null,
       currentCategory: null,
-      message: ""
+      message: "",
+      currentUser: { username: "" }
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
+    this.setState({ currentUser: currentUser });
     if (!currentUser) {
       this.setState({ redirect: "/login" })
     } else {
@@ -71,7 +73,7 @@ export default class EditCategory extends Component {
   }
 
   updateCategory() {
-    CategoryService.update(this.state.currentCategory)
+    CategoryService.update(this.state.currentCategory, this.state.currentUser)
       .then(response => {
         console.log(response.data.data);
         this.setState({
