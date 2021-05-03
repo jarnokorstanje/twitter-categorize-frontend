@@ -23,7 +23,7 @@ Node.js backend here: https://github.com/jarnokorstanje/twitter-categorize
 
 ## CRUD functionality (categories):
 
-- Add page to create categories (handles input is scalable, use +/- buttons)
+- Add page to create categories (handles input is scalable, use add/remove buttons)
 - Categories page shows categories made by the user
 - Edit page to update or delete category
 
