@@ -59,6 +59,25 @@ class CategoryService {
     );
   }
 
+  getByUser(userId) {
+    return axios.post(
+      API_URL,
+      {
+        query: `
+        {
+          categories(userId: "${userId}") {
+            id
+            userId
+            title
+            accounts {
+              handle
+            }
+          }
+        }`
+      }
+    );
+  }
+
   get(id) {
     return axios.post(
       API_URL,

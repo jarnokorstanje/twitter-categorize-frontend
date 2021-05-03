@@ -23,12 +23,12 @@ export default class CategoryList extends Component {
     if (!currentUser) {
       this.setState({ redirect: "/login" })
     } else {
-      this.retrieveCategories();
+      this.retrieveCategories(currentUser);
     }
   }
 
-  retrieveCategories() {
-    CategoryService.getAll()
+  retrieveCategories(currentUser) {
+    CategoryService.getByUser(currentUser.user._id)
       .then(response => {
         this.setState({
           categories: response.data.data.categories
@@ -70,7 +70,7 @@ export default class CategoryList extends Component {
         <div className="col-md-6">
           <header>
             <h3>
-              All categories
+              Your categories
             </h3>
           </header>
 
