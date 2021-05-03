@@ -21,13 +21,15 @@ export default class AddCategory extends Component {
       },
       handleAmount: 1,
       handles: [],
-      submitted: false
+      submitted: false,
+      currentUser: { username: "" }
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
     if (!currentUser) this.setState({ redirect: "/login" });
+    this.setState({ currentUser: currentUser });
   }
 
   onChangeTitle(e) {
@@ -58,9 +60,9 @@ export default class AddCategory extends Component {
   }
 
   saveCategory() {
-    let newCategory = this.state.newCategory;
+    let { newCategory, currentUser } = this.state;
 
-    CategoryService.create(newCategory)
+    CategoryService.create(newCategory, currentUser)
       .then(response => {
         this.setState({
           submitted: true

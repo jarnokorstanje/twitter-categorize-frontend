@@ -78,13 +78,13 @@ class CategoryService {
     );
   }
 
-  create(newCategory) {
+  create(newCategory, currentUser) {
     return axios.post(
       API_URL,
       {
         query: print(ADD_CATEGORY),
         variables: {
-          "userId": "Jarno",
+          "userId": currentUser.user._id,
           "title": newCategory.title,
           "accounts": newCategory.accounts
         }
