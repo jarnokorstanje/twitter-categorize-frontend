@@ -8,14 +8,16 @@ import { Timeline } from 'react-twitter-widgets'
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
-    this.retrieveTutorials = this.retrieveCategories.bind(this);
+    this.retrieveCategories = this.retrieveCategories.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveCategory.bind(this);
+    this.setActiveCategories = this.setActiveCategory.bind(this);
 
     this.state = {
       categories: [],
       currentCategory: null,
-      currentIndex: -1
+      currentIndex: -1,
+      currentAccountIndex: -1,
+      currentAccount: null
     };
   }
 
@@ -51,7 +53,16 @@ export default class CategoryList extends Component {
   setActiveCategory(category, index) {
     this.setState({
       currentCategory: category,
-      currentIndex: index
+      currentIndex: index,
+      currentAccount: null,
+      currentAccountIndex: -1,
+    });
+  }
+
+  setActiveAccount(account, index) {
+    this.setState({
+      currentAccount: account,
+      currentAccountIndex: index
     });
   }
 
@@ -64,7 +75,7 @@ export default class CategoryList extends Component {
       return <Redirect to={this.state.redirect} />
     }
 
-    const { categories, currentCategory, currentIndex } = this.state;
+    const { categories, currentCategory, currentIndex, currentAccount, currentAccountIndex } = this.state;
 
     return (
       <div className="row">
@@ -91,56 +102,67 @@ export default class CategoryList extends Component {
               ))}
           </ul>
         </div>
-          {currentCategory ? (
-            <div className="col-md-6">
-              <header>
-                <h3>
+        {currentCategory ? (
+          <div className="col-md-6">
+            <header>
+              <h3>
                 Category: {currentCategory.title}
-                </h3>
-              </header>
-              <Link
-                to={"/categories/" + currentCategory.id}
-                className="btn btn-warning"
-              >
-                Edit
+              </h3>
+            </header>
+            <Link
+              to={"/categories/" + currentCategory.id}
+              className="btn btn-warning"
+            >
+              Edit
               </Link>
-              <div>
-                <label>
-                  <strong>Twitter profiles:</strong>
-                </label>{" "}
-                <ul>
-                  {currentCategory.accounts.map((account, index) => (
-                    <li key={index}>
-                      {account.handle}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <Timeline
-                  dataSource={{
-                    sourceType: 'profile',
-                    screenName: 'elonmusk'
-                  }}
-                  options={{
-                    height: '600'
-                  }}
-                  renderError={
-                    (_err) => <p>Could not load tweets, check if profiles are correct</p>
-                  }
-                />
-              </div>
+            <div>
+              <label>
+                <strong>Twitter profiles:</strong>
+              </label>{" "}
+              <ul className="list-group">
+                {currentCategory.accounts.map((account, index) => (
+                  <li
+                    className={
+                      "list-group-item " +
+                      (index === currentAccountIndex ? "active" : "")
+                    }
+                    onClick={() => this.setActiveAccount(account, index)}
+                    key={index}
+                    >
+                    {account.handle}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : (
+            {currentAccount ? (
             <div className="col-md-6">
-              <header>
-                <h3>
-                  Click on a category...
-                </h3>
-              </header>
+              <Timeline
+                dataSource={{
+                  sourceType: 'profile',
+                  screenName: currentAccount.handle
+                }}
+                options={{
+                  height: '600'
+                }}
+                renderError={
+                  (_err) => <p>Could not load tweets, check if profile is correct</p>
+                }
+              />
             </div>
-          )}
-        </div>
+            ) : (
+            <p>Click on a profile</p>
+            )}
+          </div>
+        ) : (
+          <div className="col-md-6">
+            <header>
+              <h3>
+                Click on a category...
+                </h3>
+            </header>
+          </div>
+        )}
+      </div>
     );
   }
 }
