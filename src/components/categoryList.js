@@ -103,11 +103,11 @@ export default class CategoryList extends Component {
           </ul>
         </div>
         {currentCategory ? (
-          <div className="col-md-6">
+          <div className="col-md-4">
             <header>
-              <h3>
-                Category: {currentCategory.title}
-              </h3>
+              <h5>
+                {currentCategory.title}
+              </h5>
             </header>
             <Link
               to={"/categories/" + currentCategory.id}
@@ -128,37 +128,43 @@ export default class CategoryList extends Component {
                     }
                     onClick={() => this.setActiveAccount(account, index)}
                     key={index}
-                    >
+                  >
                     {account.handle}
                   </li>
                 ))}
               </ul>
             </div>
-            {currentAccount ? (
-            <div className="col-md-6">
-              <Timeline
-                dataSource={{
-                  sourceType: 'profile',
-                  screenName: currentAccount.handle
-                }}
-                options={{
-                  height: '600'
-                }}
-                renderError={
-                  (_err) => <p>Could not load tweets, check if profile is correct</p>
-                }
-              />
-            </div>
-            ) : (
-            <p>Click on a profile</p>
-            )}
           </div>
         ) : (
-          <div className="col-md-6">
+          <div className="col-md-4">
             <header>
-              <h3>
+              <h5>
                 Click on a category...
-                </h3>
+              </h5>
+            </header>
+          </div>
+        )}
+        {currentAccount ? (
+          <div className="col-md-4">
+            <Timeline
+              dataSource={{
+                sourceType: 'profile',
+                screenName: currentAccount.handle
+              }}
+              options={{
+                height: '800'
+              }}
+              renderError={
+                (_err) => <p>Could not load tweets, check if profile is correct</p>
+              }
+            />
+          </div>
+        ) : (
+          <div className="col-md-4">
+            <header>
+              <h5>
+                Click on a profile...
+              </h5>
             </header>
           </div>
         )}
