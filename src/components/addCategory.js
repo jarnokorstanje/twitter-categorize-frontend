@@ -135,7 +135,7 @@ export default class AddCategory extends Component {
         </header>
         {this.state.submitted ? (
           <div>
-            <h4>Submitted successfully!</h4>
+            <h3>Submitted successfully!</h3>
             <button className="btn btn-success" onClick={this.newCategory}>
               Add another
             </button>
@@ -143,7 +143,7 @@ export default class AddCategory extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Category title:</label>
               <input
                 type="text"
                 className="form-control"
@@ -156,7 +156,7 @@ export default class AddCategory extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="handle">Twitter profiles:</label>
+              <label htmlFor="handle">Twitter profiles (without @):</label>
               {this.createHandleInputs()}
             </div>
 

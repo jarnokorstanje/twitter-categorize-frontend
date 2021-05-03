@@ -106,7 +106,7 @@ export default class EditCategory extends Component {
       <div>
         {currentCategory ? (
           <div className="edit-form">
-            <h4>Category</h4>
+            <h3>Edit category</h3>
             <form>
               <div className="form-group">
                 <label htmlFor="title">Category title:</label>
@@ -120,7 +120,7 @@ export default class EditCategory extends Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="handle">Twitter profiles:</label>
+                <label htmlFor="handle">Twitter profiles (without @):</label>
                 {currentCategory.accounts.map((account, index) => (
                   <input
                     key={index}

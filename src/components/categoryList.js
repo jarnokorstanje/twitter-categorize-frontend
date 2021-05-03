@@ -67,8 +67,8 @@ export default class CategoryList extends Component {
     const { categories, currentCategory, currentIndex } = this.state;
 
     return (
-      <div className="list row">
-        <div className="col-md-6">
+      <div className="row">
+        <div className="col-md-4">
           <header>
             <h3>
               Your categories
@@ -91,10 +91,13 @@ export default class CategoryList extends Component {
               ))}
           </ul>
         </div>
-        <div className="col-md-6">
           {currentCategory ? (
-            <div>
-              <h4>Category: {currentCategory.title}</h4>
+            <div className="col-md-6">
+              <header>
+                <h3>
+                Category: {currentCategory.title}
+                </h3>
+              </header>
               <Link
                 to={"/categories/" + currentCategory.id}
                 className="btn btn-warning"
@@ -117,22 +120,27 @@ export default class CategoryList extends Component {
                 <Timeline
                   dataSource={{
                     sourceType: 'profile',
-                    screenName: 'TwitterDev'
+                    screenName: 'elonmusk'
                   }}
                   options={{
                     height: '600'
                   }}
+                  renderError={
+                    (_err) => <p>Could not load tweets, check if profiles are correct</p>
+                  }
                 />
               </div>
             </div>
           ) : (
-            <div>
-              <br />
-              <p>Click on a category to see details...</p>
+            <div className="col-md-6">
+              <header>
+                <h3>
+                  Click on a category...
+                </h3>
+              </header>
             </div>
           )}
         </div>
-      </div>
     );
   }
 }
