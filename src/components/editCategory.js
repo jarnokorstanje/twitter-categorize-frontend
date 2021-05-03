@@ -121,7 +121,10 @@ export default class EditCategory extends Component {
 
               <div className="form-group">
                 <label htmlFor="handle">Twitter profiles (without @):</label>
-                {currentCategory.accounts.map((account, index) => (
+              </div>
+
+              {currentCategory.accounts.map((account, index) => (
+                <div className="form-group">
                   <input
                     key={index}
                     type="text"
@@ -130,8 +133,8 @@ export default class EditCategory extends Component {
                     value={account.handle}
                     onChange={this.onChangeHandle}
                   />
-                ))}
-              </div>
+                </div>
+              ))}
             </form>
 
             <button

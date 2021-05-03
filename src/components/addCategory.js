@@ -88,14 +88,16 @@ export default class AddCategory extends Component {
 
     for (let i = 0; i < this.state.handleAmount; i++) {
       inputs.push(
-        <input
-          key={i}
-          type="text"
-          className="form-control"
-          id={i}
-          value={this.state.handles[i]}
-          onChange={this.onChangeHandle}
-        />
+        <div className="form-group">
+          <input
+            key={i}
+            type="text"
+            className="form-control"
+            id={i}
+            value={this.state.handles[i]}
+            onChange={this.onChangeHandle}
+          />
+        </div>
       )
     }
     return inputs
@@ -157,21 +159,22 @@ export default class AddCategory extends Component {
 
             <div className="form-group">
               <label htmlFor="handle">Twitter profiles (without @):</label>
-              {this.createHandleInputs()}
             </div>
+
+            {this.createHandleInputs()}
 
             <div className="form-group"> 
               <button
                 className="btn btn-danger"
                 onClick={this.removeInput}
               >
-                -
+                Remove row
               </button>{" "}
               <button
                 className="btn btn-success"
                 onClick={this.addInput}
               >
-                +
+                Add row
               </button>
             </div>
 
