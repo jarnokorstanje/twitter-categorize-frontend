@@ -67,6 +67,7 @@ export default class CategoryList extends Component {
   }
 
   toEdit(id) {
+    console.log('edit button ' + this.state.currentCategory.id);
     this.props.history.push('/categories/' + this.state.currentCategory.id);
   }
 

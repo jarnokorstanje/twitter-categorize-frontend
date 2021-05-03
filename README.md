@@ -224,19 +224,6 @@ mutation {
 }
 ```
 
-GraphQL variables (JSON):
-```
-{
-    "userId": "<userId>",
-    "title":"<title>",
-    "accounts":[
-        {
-            "handle":"<@handle>"
-        }
-    ]
-}
-```
-
 
 ### Modify category (separate variables)
 

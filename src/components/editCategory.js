@@ -26,6 +26,7 @@ export default class EditCategory extends Component {
     if (!currentUser) {
       this.setState({ redirect: "/login" })
     } else {
+      console.log('edit mount ' + this.props.match.params.id);
       this.getCategory(this.props.match.params.id);
     }
   }
@@ -75,7 +76,7 @@ export default class EditCategory extends Component {
   updateCategory() {
     CategoryService.update(this.state.currentCategory, this.state.currentUser)
       .then(response => {
-        console.log(response.data.data);
+        console.log('response ' + response.data.data.modifyCategory.id);
         this.setState({
           message: "The category was updated successfully!"
         });

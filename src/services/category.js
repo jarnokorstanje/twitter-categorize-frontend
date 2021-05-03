@@ -113,6 +113,7 @@ class CategoryService {
   }
 
   update(currentCategory, currentUser) {
+    console.log('model ' + currentCategory.id);
     return axios.post(
       API_URL,
       {
