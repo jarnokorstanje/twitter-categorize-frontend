@@ -2,6 +2,8 @@
 
 App is deployed at Netlify: https://hopeful-colden-3b1401.netlify.app/
 
+(Jelastic backend might sleep. To wake it up you could send a request with Postman. A request from the frontend does not seem to wake it up.)
+
 Node.js backend here: https://github.com/jarnokorstanje/twitter-categorize 
 
 
