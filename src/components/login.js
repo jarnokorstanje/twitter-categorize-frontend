@@ -125,6 +125,13 @@ export default class Login extends Component {
               </button>
             </div>
 
+            <div className="form-group">
+              Not registered yet? { }
+              <a href="/register">
+                Register here
+              </a>
+            </div>
+
             {this.state.message && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">

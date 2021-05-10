@@ -7,6 +7,16 @@ App is deployed at Netlify: https://hopeful-colden-3b1401.netlify.app/
 Node.js backend here: https://github.com/jarnokorstanje/twitter-categorize 
 
 
+## Changes since presentation:
+
+- Link to register page on the login page to make it easier to find
+
+
+## Project use case:
+
+I always found my Twitter feed a bit messed up, because I see the Tweets of all my accounts at the same time. Also, I found that Twitter's web app in browser is quite bloated. This project makes that a lot easier. You can separate your followed accounts into categories for easy reading and hides all the recommendations you get in the regular app.
+
+
 ## Properties of the app:
 
 - React app with Bootstrap components

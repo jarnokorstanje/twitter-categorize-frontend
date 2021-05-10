@@ -142,6 +142,13 @@ export default class Register extends Component {
               </div>
             )}
 
+            <div className="form-group">
+              Already have an account? { }
+              <a href="/login">
+                Login here
+              </a>
+            </div>
+
             {this.state.message && (
               <div className="form-group">
                 <div
